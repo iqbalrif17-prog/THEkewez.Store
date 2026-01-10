@@ -1,42 +1,200 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Store</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
-    header { background: #111; color: #fff; padding: 20px; text-align: center; }
-    .container { max-width: 1100px; margin: auto; padding: 20px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .card { background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .card img { width: 100%; border-radius: 6px; }
-    .card h3 { margin: 10px 0 5px; }
-    .price { font-weight: bold; margin-bottom: 10px; }
-    .btn { display: inline-block; background: #25D366; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; }
-    footer { background: #111; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THEkewez.Store</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #111;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 35px 15px;
+  color: #fff;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+/* PINTEREST MASONRY */
+.products {
+  padding: 15px;
+  column-count: 2;
+  column-gap: 15px;
+}
+
+@media (min-width: 768px) {
+  .products { column-count: 3; }
+}
+
+@media (min-width: 1100px) {
+  .products { column-count: 4; }
+}
+
+/* CARD */
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  break-inside: avoid;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.45);
+}
+
+/* IMAGE */
+.product-card img {
+  width: 100%;
+  display: block;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 14px;
+}
+
+.card-content h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #222;
+}
+
+.price {
+  font-weight: bold;
+  color: #e67e22;
+  margin-bottom: 10px;
+}
+
+/* WHATSAPP BUTTON */
+.btn-wa {
+  display: block;
+  text-align: center;
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+  padding: 11px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.btn-wa:hover {
+  background: #1ebe5d;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #aaa;
+  font-size: 13px;
+}
+</style>
 </head>
-<body><header>
-  <h1>My Store</h1>
-  <p>Katalog Produk • Order via WhatsApp</p>
-</header><div class="container">
-  <h2>Produk Kami</h2>
-  <div class="products"><div class="card">
-  <img src="https://via.placeholder.com/400x300" alt="Produk 1">
-  <h3>Produk 1</h3>
-  <p class="price">Rp100.000</p>
-  <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20pesan%20Produk%201" target="_blank">Pesan via WhatsApp</a>
-</div>
 
-<div class="card">
-  <img src="https://via.placeholder.com/400x300" alt="Produk 2">
-  <h3>Produk 2</h3>
-  <p class="price">Rp150.000</p>
-  <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20pesan%20Produk%202" target="_blank">Pesan via WhatsApp</a>
-</div>
+<body>
 
+<header>
+  <h1>THEkewez.Store</h1>
+  <p>Siap Menyewezkan Indonesia</p>
+</header>
+
+<section class="products">
+
+  <!-- PRODUK 1 -->
+  <div class="product-card">
+    <img src="https://picsum.photos/400/650?1">
+    <div class="card-content">
+      <h3>Produk Kewez 1</h3>
+      <div class="price">Rp 120.000</div>
+      <a class="btn-wa" target="_blank"
+         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%201">
+        Order via WhatsApp
+      </a>
+    </div>
   </div>
-</div><footer>
-  <p>© 2026 My Store</p>
-</footer></body>
+
+  <!-- PRODUK 2 -->
+  <div class="product-card">
+    <img src="https://picsum.photos/400/500?2">
+    <div class="card-content">
+      <h3>Produk Kewez 2</h3>
+      <div class="price">Rp 95.000</div>
+      <a class="btn-wa" target="_blank"
+         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%202">
+        Order via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- PRODUK 3 -->
+  <div class="product-card">
+    <img src="https://picsum.photos/400/720?3">
+    <div class="card-content">
+      <h3>Produk Kewez 3</h3>
+      <div class="price">Rp 180.000</div>
+      <a class="btn-wa" target="_blank"
+         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%203">
+        Order via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- PRODUK 4 -->
+  <div class="product-card">
+    <img src="https://picsum.photos/400/560?4">
+    <div class="card-content">
+      <h3>Produk Kewez 4</h3>
+      <div class="price">Rp 150.000</div>
+      <a class="btn-wa" target="_blank"
+         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%204">
+        Order via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- PRODUK 5 -->
+  <div class="product-card">
+    <img src="https://picsum.photos/400/680?5">
+    <div class="card-content">
+      <h3>Produk Kewez 5</h3>
+      <div class="price">Rp 210.000</div>
+      <a class="btn-wa" target="_blank"
+         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%205">
+        Order via WhatsApp
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 THEkewez.Store
+</footer>
+
+</body>
 </html>
