@@ -8,19 +8,42 @@
 <style>
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  /* HERO SLIDER */
+body {
+  background: #111;
+  color: #fff;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 40px 15px 30px;
+  background: linear-gradient(to bottom, #000, transparent);
+}
+
+header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+header p {
+  opacity: 0.8;
+}
+
+/* ===== HERO SLIDER ===== */
 .hero {
   width: 100%;
   overflow: hidden;
-  background: #000;
 }
 
 .slider {
-  width: 100%;
-  height: 65vh;
-  position: relative;
+  height: 60vh;
 }
 
 .slides {
@@ -30,13 +53,18 @@
   animation: slide 25s infinite;
 }
 
-.slides img {
+.slide {
+  width: 100%;
+  position: relative;
+}
+
+.slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* SLIDE ANIMATION */
+/* ANIMATION */
 @keyframes slide {
   0% { transform: translateX(0); }
   20% { transform: translateX(0); }
@@ -48,125 +76,57 @@
   95% { transform: translateX(-300%); }
   100% { transform: translateX(-400%); }
 }
-  
-}
 
-body {
-  margin: 0;
+/* ===== PRODUCTS ===== */
+.section {
+  padding: 60px 15px;
   background: #111;
 }
 
-/* HEADER */
-
-<section class="hero">
-  <div class="slider">
-    <div class="slides">
-      <img src="https://picsum.photos/1200/600?fashion1">
-      <img src="https://picsum.photos/1200/600?fashion2">
-      <img src="https://picsum.photos/1200/600?fashion3">
-      <img src="https://picsum.photos/1200/600?fashion4">
-      <img src="https://picsum.photos/1200/600?fashion5">
-    </div>
-  </div>
-</section>
-  }
-  
-header {
-  margin-top: 30px;
+.section h2 {
   text-align: center;
-  padding: 35px 15px;
-  color: #fff;
+  margin-bottom: 40px;
+  font-size: 26px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 30px;
-  letter-spacing: 1px;
-}
-
-header p {
-  margin-top: 10px;
-  opacity: 0.85;
-}
-
-/* PINTEREST MASONRY */
 .products {
-  padding: 15px;
-  column-count: 2;
-  column-gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
 }
 
-@media (min-width: 768px) {
-  .products { column-count: 3; }
-}
-
-@media (min-width: 1100px) {
-  .products { column-count: 4; }
-}
-
-/* CARD */
 .product-card {
   background: #fff;
-  border-radius: 16px;
-  margin-bottom: 15px;
-  break-inside: avoid;
+  color: #111;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 35px rgba(0,0,0,0.45);
-}
-
-/* IMAGE */
 .product-card img {
   width: 100%;
-  display: block;
+  height: 230px;
+  object-fit: cover;
 }
 
-/* CONTENT */
 .card-content {
   padding: 14px;
 }
 
-.card-content h3 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  color: #222;
-}
-
 .price {
-  font-weight: bold;
   color: #e67e22;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* WHATSAPP BUTTON */
 .btn-wa {
   display: block;
   text-align: center;
+  padding: 10px;
   background: #25D366;
   color: #fff;
   text-decoration: none;
-  padding: 11px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: bold;
-  font-size: 14px;
-  transition: background 0.2s ease;
-}
-
-.btn-wa:hover {
-  background: #1ebe5d;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #aaa;
-  font-size: 13px;
 }
 </style>
 </head>
@@ -178,117 +138,99 @@ footer {
   <p>Siap Menyewezkan Indonesia</p>
 </header>
 
-<section class="products">
-
-  <!-- PRODUK 1 -->
-  <div class="product-card">
-    <img src="https://picsum.photos/400/650?1">
-    <div class="card-content">
-      <h3>Produk Kewez 1</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" target="_blank"
-         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%201">
-        Order via WhatsApp
-      </a>
+<!-- HERO -->
+<section class="hero">
+  <div class="slider">
+    <div class="slides">
+      <div class="slide"><img src="https://picsum.photos/1200/600?1"></div>
+      <div class="slide"><img src="https://picsum.photos/1200/600?2"></div>
+      <div class="slide"><img src="https://picsum.photos/1200/600?3"></div>
+      <div class="slide"><img src="https://picsum.photos/1200/600?4"></div>
+      <div class="slide"><img src="https://picsum.photos/1200/600?5"></div>
     </div>
   </div>
-
-  <!-- PRODUK 2 -->
-  <div class="product-card">
-    <img src="https://picsum.photos/400/500?2">
-    <div class="card-content">
-      <h3>Produk Kewez 2</h3>
-      <div class="price">Rp 95.000</div>
-      <a class="btn-wa" target="_blank"
-         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%202">
-        Order via WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <!-- PRODUK 3 -->
-  <div class="product-card">
-    <img src="https://picsum.photos/400/720?3">
-    <div class="card-content">
-      <h3>Produk Kewez 3</h3>
-      <div class="price">Rp 180.000</div>
-      <a class="btn-wa" target="_blank"
-         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%203">
-        Order via WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <!-- PRODUK 4 -->
-  <div class="product-card">
-    <img src="https://picsum.photos/400/560?4">
-    <div class="card-content">
-      <h3>Produk Kewez 4</h3>
-      <div class="price">Rp 150.000</div>
-      <a class="btn-wa" target="_blank"
-         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%204">
-        Order via WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <!-- PRODUK 5 -->
-  <div class="product-card">
-    <img src="https://picsum.photos/400/680?5">
-    <div class="card-content">
-      <h3>Produk Kewez 5</h3>
-      <div class="price">Rp 210.000</div>
-      <a class="btn-wa" target="_blank"
-         href="https://wa.me/6288986266907?text=Halo%20THEkewez.Store,%20saya%20ingin%20order%20Produk%205">
-        Order via WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <!-- PRODUK 6 -->
-<div class="product-card">
-  <img src="https://picsum.photos/400/640?6" alt="Hoodie Streetwear THEkewez">
-  <div class="card-content">
-    <h3>Hoodie Streetwear THEkewez</h3>
-    <div class="price">Rp 250.000</div>
-    <a class="btn-wa" target="_blank"
-      href="https://wa.me/6288986266907?text=Halo%20saya%20ingin%20order%20Hoodie%20THEkewez">
-      Order via WhatsApp
-    </a>
-  </div>
-</div>
-
-<!-- PRODUK 7 -->
-<div class="product-card">
-  <img src="https://picsum.photos/400/520?7" alt="Topi Casual THEkewez">
-  <div class="card-content">
-    <h3>Topi Casual THEkewez</h3>
-    <div class="price">Rp 85.000</div>
-    <a class="btn-wa" target="_blank"
-      href="https://wa.me/6288986266907?text=Halo%20saya%20ingin%20order%20Topi%20THEkewez">
-      Order via WhatsApp
-    </a>
-  </div>
-</div>
-
-<!-- PRODUK 8 -->
-<div class="product-card">
-  <img src="https://picsum.photos/400/700?8" alt="Tote Bag THEkewez">
-  <div class="card-content">
-    <h3>Tote Bag THEkewez</h3>
-    <div class="price">Rp 110.000</div>
-    <a class="btn-wa" target="_blank"
-      href="https://wa.me/6288986266907?text=Halo%20saya%20ingin%20order%20Tote%20Bag%20THEkewez">
-      Order via WhatsApp
-    </a>
-  </div>
-</div>
-  
 </section>
 
-<footer>
-  © 2026 THEkewez.Store
-</footer>
+<!-- PRODUCTS -->
+<section class="section">
+<h2>New Arrivals</h2>
+
+<div class="products">
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?11">
+<div class="card-content">
+<h3>Produk Kewez 1</h3>
+<div class="price">Rp 120.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?12">
+<div class="card-content">
+<h3>Produk Kewez 2</h3>
+<div class="price">Rp 95.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?13">
+<div class="card-content">
+<h3>Produk Kewez 3</h3>
+<div class="price">Rp 180.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?14">
+<div class="card-content">
+<h3>Produk Kewez 4</h3>
+<div class="price">Rp 150.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?15">
+<div class="card-content">
+<h3>Produk Kewez 5</h3>
+<div class="price">Rp 210.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?16">
+<div class="card-content">
+<h3>Hoodie Street</h3>
+<div class="price">Rp 250.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?17">
+<div class="card-content">
+<h3>Topi Casual</h3>
+<div class="price">Rp 85.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/400/600?18">
+<div class="card-content">
+<h3>Tote Bag</h3>
+<div class="price">Rp 110.000</div>
+<a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
+</div>
+</div>
+
+</div>
+</section>
 
 </body>
 </html>
