@@ -10,19 +10,6 @@
   box-sizing:border-box;
   font-family:Arial, sans-serif;
 }
-
-<!-- POPUP MODAL -->
-<div id="modal" style="display:none;">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
-    <img id="modalImg">
-    <h2 id="modalTitle"></h2>
-    <div class="modalPrice" id="modalPrice"></div>
-    <p id="modalDesc"></p>
-    <a id="modalBtn" class="btn-wa" target="_blank">Beli via WhatsApp</a>
-  </div>
-</div>
-  
 body{
   margin:0;
   background:#111;
@@ -42,46 +29,54 @@ body{
   object-fit:cover;
   position:absolute;
   opacity:0;
-  transition:opacity 1s ease;
+  transition:opacity .8s ease;
 }
 .hero img.active{
   opacity:1;
 }
-
-/* DOTS */
-.dots{
+.hero button{
   position:absolute;
-  bottom:15px;
-  width:100%;
-  text-align:center;
-}
-.dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
-  margin:0 4px;
-  background:#bbb;
-  border-radius:50%;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:28px;
+  padding:10px 14px;
   cursor:pointer;
+  border-radius:50%;
 }
-.dot.active{
-  background:#fff;
-}
+.hero .prev{left:15px}
+.hero .next{right:15px}
 
 /* ===== HEADER ===== */
 header{
   text-align:center;
-  padding:30px 15px;
-}
-header h1{
-  margin:0;
-  font-size:28px;
-}
-header p{
-  opacity:.85;
+  padding:25px 15px;
 }
 
-/* ===== PRODUCTS (PINTEREST STYLE) ===== */
+/* ===== CATEGORY MENU ===== */
+.categories{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:10px 15px;
+}
+.categories button{
+  background:#222;
+  border:none;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+}
+.categories button.active{
+  background:#25D366;
+  color:#000;
+}
+
+/* ===== PRODUCTS ===== */
 .products{
   padding:15px;
   column-count:2;
@@ -97,6 +92,7 @@ header p{
   margin-bottom:15px;
   overflow:hidden;
   break-inside:avoid;
+  cursor:pointer;
 }
 .product-card img{
   width:100%;
@@ -108,13 +104,49 @@ header p{
 .price{
   color:#e67e22;
   font-weight:bold;
-  margin-bottom:10px;
+}
+
+/* ===== MODAL ===== */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal-content{
+  background:#fff;
+  color:#000;
+  width:90%;
+  max-width:420px;
+  border-radius:18px;
+  padding:18px;
+  transform:scale(.7);
+  opacity:0;
+  animation:popup .4s ease forwards;
+}
+@keyframes popup{
+  to{transform:scale(1);opacity:1}
+}
+.modal-content img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:12px;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:26px;
+  cursor:pointer;
 }
 .btn-wa{
   display:block;
   text-align:center;
   background:#25D366;
-  color:#fff;
+  color:#000;
   padding:10px;
   border-radius:10px;
   text-decoration:none;
@@ -133,21 +165,13 @@ footer{
 
 <body>
 
-<!-- SLIDER -->
+<!-- HERO -->
 <section class="hero">
   <img src="https://picsum.photos/1200/600?1" class="active">
   <img src="https://picsum.photos/1200/600?2">
   <img src="https://picsum.photos/1200/600?3">
-  <img src="https://picsum.photos/1200/600?4">
-  <img src="https://picsum.photos/1200/600?5">
-
-  <div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+  <button class="prev">‹</button>
+  <button class="next">›</button>
 </section>
 
 <header>
@@ -155,162 +179,158 @@ footer{
   <p>Siap Menyewezkan Indonesia</p>
 </header>
 
+<!-- CATEGORY -->
+<div class="categories">
+  <button class="active" onclick="filterProduct('all',this)">Semua</button>
+  <button onclick="filterProduct('hoodie',this)">Hoodie</button>
+  <button onclick="filterProduct('kaos',this)">Kaos</button>
+  <button onclick="filterProduct('jaket',this)">Jaket</button>
+</div>
+
+<!-- PRODUCTS -->
 <section class="products">
-  
-  <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 1</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
 
-   <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 2</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 3</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 4</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 5</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 6</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card">
-    <img src="https://picsum.photos/400/650?11">
-    <div class="card-content">
-      <h3>Produk Kewez 7</h3>
-      <div class="price">Rp 120.000</div>
-      <a class="btn-wa" href="https://wa.me/6288986266907">Order via WhatsApp</a>
-    </div>
-  </div>
-
- <div class="product-card"
+<div class="product-card hoodie"
 onclick="openModal(
 'https://picsum.photos/400/650?11',
-'Hoodie Streetwear THEkewez',
+'Hoodie Hitam',
 'Rp 250.000',
-'Hoodie premium berbahan fleece tebal, nyaman dipakai harian dan cocok untuk streetwear.'
+'Hoodie fleece premium'
 )">
-  <img src="https://picsum.photos/400/650?11">
-  <div class="card-content">
-    <h3>Hoodie Streetwear THEkewez</h3>
-    <div class="price">Rp 250.000</div>
+<img src="https://picsum.photos/400/650?11">
+<div class="card-content"><h3>Hoodie Hitam</h3><div class="price">Rp 250.000</div></div>
+</div>
+
+<div class="product-card hoodie"
+onclick="openModal(
+'https://picsum.photos/400/650?12',
+'Hoodie Abu',
+'Rp 260.000',
+'Hoodie streetwear'
+)">
+<img src="https://picsum.photos/400/650?12">
+<div class="card-content"><h3>Hoodie Abu</h3><div class="price">Rp 260.000</div></div>
+</div>
+
+<div class="product-card kaos"
+onclick="openModal(
+'https://picsum.photos/400/650?13',
+'Kaos Oversize',
+'Rp 120.000',
+'Cotton combed 30s'
+)">
+<img src="https://picsum.photos/400/650?13">
+<div class="card-content"><h3>Kaos Oversize</h3><div class="price">Rp 120.000</div></div>
+</div>
+
+<div class="product-card kaos"
+onclick="openModal(
+'https://picsum.photos/400/650?14',
+'Kaos Putih',
+'Rp 110.000',
+'Nyaman harian'
+)">
+<img src="https://picsum.photos/400/650?14">
+<div class="card-content"><h3>Kaos Putih</h3><div class="price">Rp 110.000</div></div>
+</div>
+
+<div class="product-card jaket"
+onclick="openModal(
+'https://picsum.photos/400/650?15',
+'Jaket Windbreaker',
+'Rp 300.000',
+'Anti angin & air'
+)">
+<img src="https://picsum.photos/400/650?15">
+<div class="card-content"><h3>Jaket Windbreaker</h3><div class="price">Rp 300.000</div></div>
+</div>
+
+<div class="product-card jaket"
+onclick="openModal(
+'https://picsum.photos/400/650?16',
+'Jaket Denim',
+'Rp 350.000',
+'Denim tebal'
+)">
+<img src="https://picsum.photos/400/650?16">
+<div class="card-content"><h3>Jaket Denim</h3><div class="price">Rp 350.000</div></div>
+</div>
+
+<div class="product-card hoodie"
+onclick="openModal(
+'https://picsum.photos/400/650?17',
+'Hoodie Coklat',
+'Rp 270.000',
+'Limited edition'
+)">
+<img src="https://picsum.photos/400/650?17">
+<div class="card-content"><h3>Hoodie Coklat</h3><div class="price">Rp 270.000</div></div>
+</div>
+
+<div class="product-card kaos"
+onclick="openModal(
+'https://picsum.photos/400/650?18',
+'Kaos Hitam',
+'Rp 115.000',
+'Streetwear style'
+)">
+<img src="https://picsum.photos/400/650?18">
+<div class="card-content"><h3>Kaos Hitam</h3><div class="price">Rp 115.000</div></div>
+</div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <img id="modalImg">
+    <h2 id="modalTitle"></h2>
+    <div class="price" id="modalPrice"></div>
+    <p id="modalDesc"></p>
+    <a id="modalBtn" class="btn-wa" target="_blank">Order WhatsApp</a>
   </div>
 </div>
-  
-</section>
 
 <footer>© 2026 THEkewez.Store</footer>
 
 <script>
+/* SLIDER */
 let slides=document.querySelectorAll('.hero img');
-let dots=document.querySelectorAll('.dot');
 let index=0;
-
-function showSlide(i){
-  slides.forEach(s=>s.classList.remove('active'));
-  dots.forEach(d=>d.classList.remove('active'));
-  slides[i].classList.add('active');
-  dots[i].classList.add('active');
-}
-setInterval(()=>{
+document.querySelector('.next').onclick=()=>{
+  slides[index].classList.remove('active');
   index=(index+1)%slides.length;
-  showSlide(index);
-},4000);
+  slides[index].classList.add('active');
+}
+document.querySelector('.prev').onclick=()=>{
+  slides[index].classList.remove('active');
+  index=(index-1+slides.length)%slides.length;
+  slides[index].classList.add('active');
+}
 
-dots.forEach((dot,i)=>{
-  dot.onclick=()=>{index=i;showSlide(i);}
-});
-</script>
+/* FILTER */
+function filterProduct(cat,btn){
+  document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(p=>{
+    p.style.display=(cat==='all'||p.classList.contains(cat))?'block':'none';
+  });
+}
 
 /* MODAL */
-#modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-.modal-content{
-  background:#fff;
-  color:#000;
-  width:90%;
-  max-width:420px;
-  max-height:90vh;
-  overflow:auto;
-  border-radius:18px;
-  padding:18px;
-  position:relative;
-}
-.modal-content img{
-  width:100%;
-  border-radius:14px;
-  margin-bottom:12px;
-}
-.close{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:26px;
-  cursor:pointer;
-}
-.modalPrice{
-  font-weight:bold;
-  color:#e67e22;
-  margin-bottom:10px;
-}
-
-<script>
 function openModal(img,title,price,desc){
-  document.getElementById("modal").style.display="flex";
+  modal.style.display='flex';
   modalImg.src=img;
   modalTitle.innerText=title;
   modalPrice.innerText=price;
   modalDesc.innerText=desc;
-  modalBtn.href="https://wa.me/6288986266907?text=Halo%20saya%20ingin%20order%20"+encodeURIComponent(title);
+  modalBtn.href='https://wa.me/6288986266907?text='+encodeURIComponent('Saya ingin order '+title);
 }
 function closeModal(){
-  document.getElementById("modal").style.display="none";
+  modal.style.display='none';
 }
 </script>
-  
+
 </body>
 </html>
