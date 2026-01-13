@@ -180,6 +180,66 @@ footer{
   object-fit: cover;
 }
 
+  /* ===== POPUP SLIDE ===== */
+#popupSlide{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-box{
+  background: #fff;
+  width: 92%;
+  max-width: 500px;
+  border-radius: 18px;
+  padding: 15px;
+  animation: popup .4s ease forwards;
+}
+
+.popup-close{
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #000;
+}
+
+/* gambar utama */
+.popup-main{
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* slider horizontal */
+.popup-slider{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.popup-slider img{
+  min-width: 85%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  scroll-snap-align: center;
+}
+
+/* desktop */
+@media(min-width:768px){
+  .popup-slider img{
+    min-width: 70%;
+    height: 200px;
+  }
+}
+
   
 </style>
 </head>
@@ -318,6 +378,24 @@ onclick="openModal(
   </div>
 </div>
 
+<!-- POPUP SLIDE PUTIH -->
+<div id="popupSlide">
+  <div class="popup-box">
+    <span class="popup-close" onclick="closePopup()">×</span>
+
+    <!-- GAMBAR UTAMA -->
+    <img class="popup-main" src="https://picsum.photos/800/500?30">
+
+    <!-- SLIDER HORIZONTAL -->
+    <div class="popup-slider">
+      <img src="https://picsum.photos/900/400?31">
+      <img src="https://picsum.photos/900/400?32">
+      <img src="https://picsum.photos/900/400?33">
+    </div>
+  </div>
+</div>
+
+  
 <footer>© 2026 THEkewez.Store</footer>
 
 <script>
@@ -356,6 +434,20 @@ function openModal(img,title,price,desc){
 function closeModal(){
   modal.style.display='none';
 }
+
+<script>
+function openPopup(){
+  document.getElementById('popupSlide').style.display='flex';
+}
+function closePopup(){
+  document.getElementById('popupSlide').style.display='none';
+}
+
+/* auto muncul 2 detik setelah buka web */
+setTimeout(openPopup, 2000);
+</script>
+
+  
 </script>
 
 </body>
