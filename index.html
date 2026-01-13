@@ -216,6 +216,27 @@ header{text-align:center;padding:20px}
   opacity:.85;
 }
 }
+
+.shirt-wrapper{
+  position: relative;
+  max-width:260px;
+  margin:0 auto 15px;
+}
+
+.shirt-wrapper img{
+  width:100%;
+  display:block;
+}
+
+#shirtColor{
+  position:absolute;
+  inset:0;
+  background:#ffffff;
+  mix-blend-mode: multiply;
+  opacity:.85;
+  pointer-events:none;
+  transition: background .25s ease;
+}
   
 /* FOOTER */
 footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
@@ -292,9 +313,10 @@ footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
   <section class="color-preview">
   <h2>Pilih Warna Baju</h2>
 
-  <div class="shirt-wrapper">
-    <img id="shirtImage" src="assets/baju-putih.png" alt="Baju">
-  </div>
+<div class="shirt-wrapper">
+  <img src="assets/img/baju-putih.png" alt="Baju">
+  <div id="shirtColor"></div>
+</div>
 
   <p class="color-code">
     Kode warna: <b id="colorCode">#FFFFFF</b>
@@ -409,26 +431,12 @@ promoTrack.addEventListener('touchend', e => {
 
 <script>
 const colors = [
-  "#000000","#FFFFFF","#C0C0C0","#808080","#FF0000",
-  "#800000","#FFA500","#FFD700","#FFFF00","#808000",
-  "#00FF00","#008000","#00FFFF","#008080","#0000FF",
-  "#000080","#800080","#FF00FF","#A52A2A","#D2691E",
-  "#F5F5DC","#FFE4C4","#D2B48C","#BC8F8F","#F08080",
-  "#CD5C5C","#DC143C","#B22222","#8B0000","#FF69B4",
-  "#FFB6C1","#DB7093","#C71585","#4B5320","#556B2F",
-  "#6B8E23","#9ACD32","#2F4F4F","#708090","#B0C4DE",
-  "#87CEEB","#4682B4","#1E90FF","#191970","#483D8B",
-  "#6A5ACD","#7B68EE","#9370DB","#E6E6FA","#F5DEB3",
-
-  /* === WARNA BARU === */
-  "#3B2F2F","#6F4E37","#C2B280","#B2AC88","#556B2F",
-  "#8B4513","#FADADD","#E6C7C2","#C1E1C1","#AEC6CF",
-  "#FFF1C1","#DCD0FF","#1C1C1C","#2B2E4A","#36454F",
-  "#4A4A4A","#0F3057"
+  "#000000","#FFFFFF","#C2B280","#4B5320","#800000",
+  "#2B2E4A","#556B2F","#FADADD","#36454F","#0F3057"
 ];
 
 const grid = document.getElementById("colorGrid");
-const shirt = document.getElementById("shirtImage");
+const overlay = document.getElementById("shirtColor");
 const codeText = document.getElementById("colorCode");
 
 colors.forEach(color=>{
@@ -437,15 +445,7 @@ colors.forEach(color=>{
   box.style.background = color;
 
   box.onclick = ()=>{
-    shirt.style.filter = `
-      drop-shadow(0 10px 20px rgba(0,0,0,.3))
-      saturate(200%)
-      brightness(0.95)
-      sepia(1)
-      hue-rotate(${Math.random()*360}deg)
-    `;
-    shirt.style.backgroundColor = color;
-    shirt.style.mixBlendMode = "multiply";
+    overlay.style.background = color;
     codeText.innerText = color;
   };
 
