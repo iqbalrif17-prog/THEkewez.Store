@@ -13,22 +13,58 @@ body{margin:0;background:#111;color:#fff}
 .logo-banner{width:100%;aspect-ratio:16/3;overflow:hidden}
 .logo-banner img{width:100%;height:100%;object-fit:cover}
 
-/* HERO */
-.hero{position:relative;height:60vh;max-height:420px;overflow:hidden}
-.hero-slide{position:absolute;inset:0;opacity:0;transition:.5s}
-.hero-slide img{width:100%;height:100%;object-fit:cover}
-.hero-slide.active{opacity:1}
-.hero button{
-  position:absolute;top:50%;transform:translateY(-50%);
-  background:rgba(0,0,0,.6);border:none;color:#fff;
-  font-size:28px;padding:10px 14px;border-radius:50%;cursor:pointer;z-index:10
+/* ===== HERO PERFECT ANDROID ===== */
+.hero{
+  position: relative;
+  width: 100%;
+  height: 42vh;          /* KHUSUS MOBILE */
+  max-height: 300px;    /* biar tidak kepanjangan */
+  min-height: 220px;
+  overflow: hidden;
 }
-.hero .prev{left:15px}
-.hero .next{right:15px}
 
-@media(min-width:768px){
-  .hero{height:70vh;max-height:520px}
+.hero-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .5s ease;
 }
+
+.hero-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center; /* fokus tengah */
+}
+
+.hero-slide.active{
+  opacity:1;
+}
+
+.hero button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:26px;
+  padding:8px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:10;
+}
+
+.hero .prev{left:12px}
+.hero .next{right:12px}
+
+/* ===== TABLET & DESKTOP ===== */
+@media(min-width:768px){
+  .hero{
+    height:70vh;
+    max-height:520px;
+    min-height:380px;
+  }
 
 /* HEADER */
 header{text-align:center;padding:20px}
@@ -87,6 +123,62 @@ header{text-align:center;padding:20px}
   min-width:85%;height:160px;object-fit:cover;border-radius:12px
 }
 
+/* ===== SLIDE PROMO BAWAH ===== */
+.promo-slider{
+  position: relative;
+  width: 100%;
+  height: 75vh;        /* lebih memanjang ke bawah */
+  max-height: 650px;
+  margin: 25px 0;
+  overflow: hidden;
+}
+
+.promo-track{
+  display: flex;
+  height: 100%;
+  transition: transform .45s ease;
+}
+
+.promo-slide{
+  min-width: 100%;
+  height: 100%;
+}
+
+.promo-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* tombol PC */
+.promo-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:28px;
+  padding:10px 14px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:5;
+}
+
+.promo-btn.prev{left:15px}
+.promo-btn.next{right:15px}
+
+/* ANDROID */
+@media(max-width:768px){
+  .promo-slider{
+    height:80vh;
+    max-height:none;
+  }
+  .promo-btn{
+    display:none; /* swipe only */
+  }
+}
+
 /* FOOTER */
 footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
 </style>
@@ -136,6 +228,28 @@ footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
 
 </section>
 
+<!-- SLIDE PROMO BAWAH PRODUK -->
+<section class="promo-slider">
+
+  <div class="promo-track">
+    <div class="promo-slide">
+      <img src="https://picsum.photos/800/1100?51" alt="">
+    </div>
+    <div class="promo-slide">
+      <img src="https://picsum.photos/800/1100?52" alt="">
+    </div>
+    <div class="promo-slide">
+      <img src="https://picsum.photos/800/1100?53" alt="">
+    </div>
+  </div>
+
+  <!-- tombol PC -->
+  <button class="promo-btn prev">‹</button>
+  <button class="promo-btn next">›</button>
+
+</section>
+
+  
 <!-- MODAL -->
 <div id="modal">
   <div class="modal-content">
@@ -195,5 +309,51 @@ function closePopup(){popupSlide.style.display='none'}
 setTimeout(()=>popupSlide.style.display='flex',2000);
 </script>
 
+<script>
+/* ===== PROMO SLIDER BAWAH ===== */
+const promoSlider = document.querySelector('.promo-slider');
+const promoTrack  = promoSlider.querySelector('.promo-track');
+const promoSlides = promoSlider.querySelectorAll('.promo-slide');
+const promoPrev   = promoSlider.querySelector('.promo-btn.prev');
+const promoNext   = promoSlider.querySelector('.promo-btn.next');
+
+let promoIndex = 0;
+
+function updatePromo(){
+  promoTrack.style.transform = `translateX(-${promoIndex * 100}%)`;
+}
+
+/* tombol PC */
+promoNext.onclick = () => {
+  promoIndex = (promoIndex + 1) % promoSlides.length;
+  updatePromo();
+};
+
+promoPrev.onclick = () => {
+  promoIndex = (promoIndex - 1 + promoSlides.length) % promoSlides.length;
+  updatePromo();
+};
+
+/* SWIPE ANDROID */
+let startX = 0;
+
+promoTrack.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
+
+promoTrack.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  if(diff > 60){
+    promoIndex = (promoIndex + 1) % promoSlides.length;
+  }else if(diff < -60){
+    promoIndex = (promoIndex - 1 + promoSlides.length) % promoSlides.length;
+  }
+  updatePromo();
+});
+</script>
+
+  
 </body>
 </html>
