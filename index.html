@@ -6,229 +6,89 @@
 <title>THEkewez.Store</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
-body{
-  margin:0;
-  background:#111;
-  color:#fff;
-}
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#111;color:#fff}
 
-/* ===== LOGO BANNER ===== */
-.logo-banner{
-  width:100%;
-  aspect-ratio:16/3;
-  overflow:hidden;
-}
-.logo-banner img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+/* LOGO */
+.logo-banner{width:100%;aspect-ratio:16/3;overflow:hidden}
+.logo-banner img{width:100%;height:100%;object-fit:cover}
 
-/* ===== HERO FIX ===== */
-.hero{
-  position: relative;
-  width: 100%;
-  height: 60vh;
-  max-height: 420px;
-  overflow: hidden;
-}
-.hero img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:.5s;
-}
-.hero img.active{opacity:1}
-
+/* HERO */
+.hero{position:relative;height:60vh;max-height:420px;overflow:hidden}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:.5s}
+.hero-slide img{width:100%;height:100%;object-fit:cover}
+.hero-slide.active{opacity:1}
 .hero button{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,.6);
-  border:none;
-  color:#fff;
-  font-size:28px;
-  padding:10px 14px;
-  cursor:pointer;
-  border-radius:50%;
-  z-index:10;
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.6);border:none;color:#fff;
+  font-size:28px;padding:10px 14px;border-radius:50%;cursor:pointer;z-index:10
 }
 .hero .prev{left:15px}
 .hero .next{right:15px}
 
 @media(min-width:768px){
-  .hero{
-    height:70vh;
-    max-height:520px;
-  }
+  .hero{height:70vh;max-height:520px}
 }
 
-/* ===== HEADER ===== */
-header{
-  text-align:center;
-  padding:25px 15px;
-}
+/* HEADER */
+header{text-align:center;padding:20px}
 
-/* ===== CATEGORY ===== */
-.categories{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:10px 15px;
-}
+/* CATEGORY */
+.categories{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .categories button{
-  background:#222;
-  border:none;
-  color:#fff;
-  padding:8px 16px;
-  border-radius:20px;
-  cursor:pointer;
+  background:#222;color:#fff;border:none;
+  padding:8px 16px;border-radius:20px;cursor:pointer
 }
-.categories button.active{
-  background:#25D366;
-  color:#000;
-}
+.categories button.active{background:#25D366;color:#000}
 
-/* ===== PRODUCTS ===== */
-.products{
-  padding:15px;
-  column-count:2;
-  column-gap:15px;
-}
+/* PRODUCTS */
+.products{padding:15px;column-count:2;column-gap:15px}
 @media(min-width:768px){.products{column-count:3}}
 @media(min-width:1100px){.products{column-count:4}}
 
 .product-card{
-  background:#fff;
-  color:#000;
-  border-radius:18px;
-  margin-bottom:15px;
-  overflow:hidden;
-  break-inside:avoid;
-  cursor:pointer;
+  background:#fff;color:#000;border-radius:16px;
+  margin-bottom:15px;overflow:hidden;cursor:pointer;break-inside:avoid
 }
-.product-card img{
-  width:100%;
-  display:block;
-}
-.card-content{
-  padding:14px;
-}
-.price{
-  color:#e67e22;
-  font-weight:bold;
-}
+.product-card img{width:100%;display:block}
+.card-content{padding:12px}
+.price{color:#e67e22;font-weight:bold}
 
-/* ===== MODAL ===== */
+/* MODAL */
 #modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
+  position:fixed;inset:0;background:rgba(0,0,0,.8);
+  display:none;align-items:center;justify-content:center;z-index:999
 }
 .modal-content{
-  background:#fff;
-  color:#000;
-  width:90%;
-  max-width:420px;
-  border-radius:18px;
-  padding:18px;
-  animation:popup .3s ease forwards;
+  background:#fff;color:#000;width:90%;max-width:420px;
+  border-radius:16px;padding:16px;position:relative
 }
-@keyframes popup{
-  from{transform:scale(.7);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-.modal-content img{
-  width:100%;
-  border-radius:14px;
-}
-.close{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:26px;
-  cursor:pointer;
-}
+.modal-content img{width:100%;border-radius:12px}
+.close{position:absolute;top:10px;right:14px;font-size:24px;cursor:pointer}
 .btn-wa{
-  display:block;
-  text-align:center;
-  background:#25D366;
-  color:#000;
-  padding:10px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
+  display:block;margin-top:10px;text-align:center;
+  background:#25D366;color:#000;padding:10px;
+  border-radius:10px;text-decoration:none;font-weight:bold
 }
 
-/* ===== POPUP SLIDE ===== */
+/* POPUP */
 #popupSlide{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
+  position:fixed;inset:0;background:rgba(0,0,0,.7);
+  display:none;align-items:center;justify-content:center;z-index:9999
 }
 .popup-box{
-  background:#fff;
-  width:92%;
-  max-width:500px;
-  border-radius:18px;
-  padding:15px;
+  background:#fff;width:92%;max-width:500px;
+  border-radius:18px;padding:15px;position:relative
 }
-.popup-close{
-  position:absolute;
-  right:18px;
-  top:12px;
-  font-size:26px;
-  cursor:pointer;
-  color:#000;
-}
-.popup-main{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:12px;
-}
-.popup-slider{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
+.popup-close{position:absolute;right:15px;top:10px;font-size:26px;cursor:pointer}
+.popup-main{width:100%;border-radius:12px;margin-bottom:10px}
+.popup-slider{display:flex;gap:10px;overflow-x:auto}
 .popup-slider img{
-  min-width:85%;
-  height:160px;
-  object-fit:cover;
-  border-radius:12px;
-  scroll-snap-align:center;
-}
-@media(min-width:768px){
-  .popup-slider img{
-    min-width:70%;
-    height:200px;
-  }
+  min-width:85%;height:160px;object-fit:cover;border-radius:12px
 }
 
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:25px;
-  color:#aaa;
-  font-size:13px;
-}
+/* FOOTER */
+footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
 </style>
 </head>
 
@@ -239,9 +99,9 @@ footer{
 </div>
 
 <section class="hero">
-  <img src="assets/img/tes -1.jpg" class="active">
-  <img src="assets/img/tes - -2.jpg">
-  <img src="assets/img/tes -3.jpg">
+  <div class="hero-slide active"><img src="assets/img/tes -1.jpg"></div>
+  <div class="hero-slide"><img src="assets/img/tes - -2.jpg"></div>
+  <div class="hero-slide"><img src="assets/img/tes -3.jpg"></div>
   <button class="prev">‹</button>
   <button class="next">›</button>
 </section>
@@ -259,9 +119,24 @@ footer{
 </div>
 
 <section class="products">
-  <!-- produk kamu tetap sama, tidak diubah -->
+
+<div class="product-card hoodie" onclick="openModal(
+'https://picsum.photos/400/600?1','Hoodie Hitam','Rp 250.000','Nyaman & stylish'
+)">
+<img src="https://picsum.photos/400/600?1">
+<div class="card-content"><h3>Hoodie Hitam</h3><div class="price">Rp 250.000</div></div>
+</div>
+
+<div class="product-card kaos" onclick="openModal(
+'https://picsum.photos/400/600?2','Kaos Putih','Rp 110.000','Harian'
+)">
+<img src="https://picsum.photos/400/600?2">
+<div class="card-content"><h3>Kaos Putih</h3><div class="price">Rp 110.000</div></div>
+</div>
+
 </section>
 
+<!-- MODAL -->
 <div id="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">×</span>
@@ -273,14 +148,15 @@ footer{
   </div>
 </div>
 
+<!-- POPUP -->
 <div id="popupSlide">
   <div class="popup-box">
     <span class="popup-close" onclick="closePopup()">×</span>
-    <img class="popup-main" src="https://picsum.photos/800/500?30">
+    <img class="popup-main" src="https://picsum.photos/800/500?10">
     <div class="popup-slider">
-      <img src="https://picsum.photos/900/400?31">
-      <img src="https://picsum.photos/900/400?32">
-      <img src="https://picsum.photos/900/400?33">
+      <img src="https://picsum.photos/900/400?11">
+      <img src="https://picsum.photos/900/400?12">
+      <img src="https://picsum.photos/900/400?13">
     </div>
   </div>
 </div>
@@ -288,19 +164,11 @@ footer{
 <footer>© 2026 THEkewez.Store</footer>
 
 <script>
-/* HERO SLIDER */
-let slides=document.querySelectorAll('.hero img');
-let index=0;
-document.querySelector('.next').onclick=()=>{
-  slides[index].classList.remove('active');
-  index=(index+1)%slides.length;
-  slides[index].classList.add('active');
-}
-document.querySelector('.prev').onclick=()=>{
-  slides[index].classList.remove('active');
-  index=(index-1+slides.length)%slides.length;
-  slides[index].classList.add('active');
-}
+/* HERO */
+let slides=document.querySelectorAll('.hero-slide');
+let i=0;
+document.querySelector('.next').onclick=()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active')}
+document.querySelector('.prev').onclick=()=>{slides[i].classList.remove('active');i=(i-1+slides.length)%slides.length;slides[i].classList.add('active')}
 
 /* FILTER */
 function filterProduct(cat,btn){
@@ -318,19 +186,13 @@ function openModal(img,title,price,desc){
   modalTitle.innerText=title;
   modalPrice.innerText=price;
   modalDesc.innerText=desc;
+  modalBtn.href='https://wa.me/6288986266907?text='+encodeURIComponent('Saya ingin order '+title);
 }
-function closeModal(){
-  modal.style.display='none';
-}
+function closeModal(){modal.style.display='none'}
 
 /* POPUP */
-function openPopup(){
-  popupSlide.style.display='flex';
-}
-function closePopup(){
-  popupSlide.style.display='none';
-}
-setTimeout(openPopup,2000);
+function closePopup(){popupSlide.style.display='none'}
+setTimeout(()=>popupSlide.style.display='flex',2000);
 </script>
 
 </body>
