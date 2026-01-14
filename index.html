@@ -593,13 +593,20 @@ const next = document.querySelector('.ps-btn.next');
 
 let index = 0;
 
+function visibleCount(){
+  if(window.innerWidth <= 600) return 1;
+  if(window.innerWidth <= 900) return 2;
+  return 3;
+}
+
 function updateSlide(){
   const cardWidth = cards[0].offsetWidth + 16;
   track.style.transform = `translateX(-${index * cardWidth}px)`;
 }
 
 next.onclick = () => {
-  if(index < cards.length - 1){
+  const maxIndex = cards.length - visibleCount();
+  if(index < maxIndex){
     index++;
     updateSlide();
   }
@@ -612,7 +619,12 @@ prev.onclick = () => {
   }
 };
 
-/* BUY NOW KE WA */
+window.addEventListener("resize",()=>{
+  index = 0;
+  updateSlide();
+});
+
+/* BUY NOW */
 function buyNow(product){
   window.open(
     "https://wa.me/6288986266907?text=" +
@@ -621,17 +633,18 @@ function buyNow(product){
   );
 }
 
-/* SWIPE MOBILE */
+/* SWIPE */
 let startX = 0;
-
-track.addEventListener("touchstart", e=>{
+track.addEventListener("touchstart",e=>{
   startX = e.touches[0].clientX;
 });
-
-track.addEventListener("touchend", e=>{
+track.addEventListener("touchend",e=>{
   let diff = startX - e.changedTouches[0].clientX;
-  if(diff > 60 && index < cards.length - 1){index++}
-  if(diff < -60 && index > 0){index--}
+  const maxIndex = cards.length - visibleCount();
+
+  if(diff > 60 && index < maxIndex) index++;
+  if(diff < -60 && index > 0) index--;
+
   updateSlide();
 });
 </script>
