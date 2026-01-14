@@ -237,6 +237,77 @@ header{text-align:center;padding:20px}
   pointer-events:none;
   transition: background .25s ease;
 }
+
+.nft-ui{
+  max-width:380px;
+  margin:40px auto;
+  text-align:center;
+}
+
+/* BAR ATAS */
+.top-line{
+  height:4px;
+  width:100%;
+  background:linear-gradient(90deg,#7CFF00,#00FFD1);
+  border-radius:10px;
+  margin-bottom:14px;
+}
+
+/* GAMBAR BESAR */
+.main-image img{
+  width:100%;
+  border-radius:20px;
+  display:block;
+}
+
+/* BAR INFO */
+.info-bar{
+  margin-top:12px;
+  background:#1a1a1a;
+  border-radius:16px;
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.info-left h3{
+  margin:0;
+  font-size:14px;
+}
+
+.info-center{
+  font-size:11px;
+  opacity:.7;
+}
+
+/* TOMBOL GESER */
+.info-right{
+  display:flex;
+  gap:6px;
+}
+
+.nav-btn{
+  background:#fff;
+  color:#000;
+  border:none;
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BUY NOW */
+.buy-now{
+  margin-top:14px;
+  padding:10px;
+  border-radius:14px;
+  background:linear-gradient(90deg,#8A2BE2,#00FFAA);
+  font-weight:bold;
+  font-size:13px;
+  cursor:pointer;
+}
   
 /* FOOTER */
 footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
@@ -262,6 +333,35 @@ footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
   <p>Siap Menyewezkan Indonesia</p>
 </header>
 
+<section class="nft-ui">
+
+  <div class="top-line"></div>
+
+  <div class="main-image">
+    <img src="assets/img/artwork-1.png" alt="Artwork">
+  </div>
+
+  <div class="info-bar">
+    <div class="info-left">
+      <h3>Freakish Monkey</h3>
+    </div>
+
+    <div class="info-center">
+      <span>Limited Edition</span>
+    </div>
+
+    <div class="info-right">
+      <button class="nav-btn">‹</button>
+      <button class="nav-btn">›</button>
+    </div>
+  </div>
+
+  <div class="buy-now">
+    BUY NOW
+  </div>
+
+</section>
+  
 <div class="categories">
   <button class="active" onclick="filterProduct('all',this)">Semua</button>
   <button onclick="filterProduct('hoodie',this)">Hoodie</button>
