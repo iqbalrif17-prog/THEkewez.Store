@@ -238,75 +238,87 @@ header{text-align:center;padding:20px}
   transition: background .25s ease;
 }
 
-.nft-ui{
-  max-width:380px;
-  margin:40px auto;
-  text-align:center;
+/* === PRODUCT SLIDER === */
+.product-slider{
+  position:relative;
+  padding:30px 10px;
 }
 
-/* BAR ATAS */
-.top-line{
-  height:4px;
-  width:100%;
-  background:linear-gradient(90deg,#7CFF00,#00FFD1);
-  border-radius:10px;
-  margin-bottom:14px;
+.ps-wrapper{
+  overflow:hidden;
 }
 
-/* GAMBAR BESAR */
-.main-image img{
-  width:100%;
-  border-radius:20px;
-  display:block;
-}
-
-/* BAR INFO */
-.info-bar{
-  margin-top:12px;
-  background:#1a1a1a;
-  border-radius:16px;
-  padding:10px 14px;
+.ps-track{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
+  gap:16px;
+  transition:transform .4s ease;
 }
 
-.info-left h3{
-  margin:0;
-  font-size:14px;
-}
-
-.info-center{
-  font-size:11px;
-  opacity:.7;
-}
-
-/* TOMBOL GESER */
-.info-right{
-  display:flex;
-  gap:6px;
-}
-
-.nav-btn{
+/* CARD */
+.ps-card{
+  flex:0 0 calc(100% / 3);
   background:#fff;
   color:#000;
+  border-radius:16px;
+  padding:12px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.ps-card img{
+  width:100%;
+  border-radius:12px;
+}
+
+.ps-card h3{
+  margin:10px 0 5px;
+}
+
+.ps-card .price{
+  color:#e67e22;
+  font-weight:bold;
+}
+
+.ps-card button{
+  margin-top:8px;
+  width:100%;
+  background:#25D366;
   border:none;
-  width:28px;
-  height:28px;
-  border-radius:8px;
-  font-size:16px;
+  padding:10px;
+  border-radius:10px;
+  font-weight:bold;
   cursor:pointer;
 }
 
-/* BUY NOW */
-.buy-now{
-  margin-top:14px;
-  padding:10px;
-  border-radius:14px;
-  background:linear-gradient(90deg,#8A2BE2,#00FFAA);
-  font-weight:bold;
-  font-size:13px;
+/* BUTTON */
+.ps-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  border:none;
+  font-size:26px;
+  padding:8px 14px;
+  border-radius:50%;
   cursor:pointer;
+  z-index:10;
+}
+
+.ps-btn.prev{left:10px}
+.ps-btn.next{right:10px}
+
+/* TABLET */
+@media(max-width:900px){
+  .ps-card{flex:0 0 50%}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .ps-card{flex:0 0 100%}
+  .ps-btn{display:none}
+}
+  
 }
   
 /* FOOTER */
@@ -333,33 +345,53 @@ footer{text-align:center;padding:20px;color:#aaa;font-size:13px}
   <p>Siap Menyewezkan Indonesia</p>
 </header>
 
-<section class="nft-ui">
+<!-- === SLIDER PRODUK 5 CARD === -->
+<section class="product-slider">
 
-  <div class="top-line"></div>
+  <button class="ps-btn prev">‹</button>
+  <button class="ps-btn next">›</button>
 
-  <div class="main-image">
-    <img src="assets/img/artwork-1.png" alt="Artwork">
-  </div>
+  <div class="ps-wrapper">
+    <div class="ps-track">
 
-  <div class="info-bar">
-    <div class="info-left">
-      <h3>Freakish Monkey</h3>
+      <!-- CARD -->
+      <div class="ps-card">
+        <img src="https://picsum.photos/400/500?1">
+        <h3>Hoodie Hitam</h3>
+        <p class="price">Rp 250.000</p>
+        <button onclick="buyNow('Hoodie Hitam')">Buy Now</button>
+      </div>
+
+      <div class="ps-card">
+        <img src="https://picsum.photos/400/500?2">
+        <h3>Kaos Putih</h3>
+        <p class="price">Rp 120.000</p>
+        <button onclick="buyNow('Kaos Putih')">Buy Now</button>
+      </div>
+
+      <div class="ps-card">
+        <img src="https://picsum.photos/400/500?3">
+        <h3>Jaket Denim</h3>
+        <p class="price">Rp 320.000</p>
+        <button onclick="buyNow('Jaket Denim')">Buy Now</button>
+      </div>
+
+      <div class="ps-card">
+        <img src="https://picsum.photos/400/500?4">
+        <h3>Hoodie Abu</h3>
+        <p class="price">Rp 260.000</p>
+        <button onclick="buyNow('Hoodie Abu')">Buy Now</button>
+      </div>
+
+      <div class="ps-card">
+        <img src="https://picsum.photos/400/500?5">
+        <h3>Kaos Oversize</h3>
+        <p class="price">Rp 140.000</p>
+        <button onclick="buyNow('Kaos Oversize')">Buy Now</button>
+      </div>
+
     </div>
-
-    <div class="info-center">
-      <span>Limited Edition</span>
-    </div>
-
-    <div class="info-right">
-      <button class="nav-btn">‹</button>
-      <button class="nav-btn">›</button>
-    </div>
   </div>
-
-  <div class="buy-now">
-    BUY NOW
-  </div>
-
 </section>
   
 <div class="categories">
@@ -550,6 +582,57 @@ colors.forEach(color=>{
   };
 
   grid.appendChild(box);
+});
+</script>
+
+<script>
+const track = document.querySelector('.ps-track');
+const cards = document.querySelectorAll('.ps-card');
+const prev = document.querySelector('.ps-btn.prev');
+const next = document.querySelector('.ps-btn.next');
+
+let index = 0;
+
+function updateSlide(){
+  const cardWidth = cards[0].offsetWidth + 16;
+  track.style.transform = `translateX(-${index * cardWidth}px)`;
+}
+
+next.onclick = () => {
+  if(index < cards.length - 1){
+    index++;
+    updateSlide();
+  }
+};
+
+prev.onclick = () => {
+  if(index > 0){
+    index--;
+    updateSlide();
+  }
+};
+
+/* BUY NOW KE WA */
+function buyNow(product){
+  window.open(
+    "https://wa.me/6288986266907?text=" +
+    encodeURIComponent("Saya ingin beli " + product),
+    "_blank"
+  );
+}
+
+/* SWIPE MOBILE */
+let startX = 0;
+
+track.addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", e=>{
+  let diff = startX - e.changedTouches[0].clientX;
+  if(diff > 60 && index < cards.length - 1){index++}
+  if(diff < -60 && index > 0){index--}
+  updateSlide();
 });
 </script>
   
