@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <style>
+  <style>
 /* FONT IMPORT */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
@@ -12,11 +14,15 @@
     font-family: 'Plus Jakarta Sans', Arial, sans-serif; 
 }
 
-body { 
+html, body { 
     margin: 0; 
-    background: #f4f7f5; /* Warna dasar abu-abu kehijauan sangat muda */
+    padding: 0;
+    background: #f4f7f5; 
     color: #2f3e34; 
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
+    /* Mencegah zoom out/geser kanan di HP */
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* NAVIGATION */
@@ -25,6 +31,7 @@ body {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    width: 100%;
 }
 .nav-inner {
     max-width: 1100px; margin: auto; padding: 15px 20px;
@@ -36,7 +43,7 @@ body {
     font-weight: 600; color: #4caf84; 
 }
 
-/* HERO PASTEL (Milikmu yang diperkuat) */
+/* HERO PASTEL */
 .minimal-hero {
     position: relative;
     min-height: 60vh;
@@ -45,11 +52,11 @@ body {
     justify-content: center;
     text-align: center;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #eef3f0 0%, #dfe7e2 100%); /* Warna pastel */
+    background: linear-gradient(135deg, #eef3f0 0%, #dfe7e2 100%);
     overflow: hidden;
+    width: 100%;
 }
 
-/* PATTERN KOTAK-KOTAK */
 .minimal-hero::before {
     content: "";
     position: absolute;
@@ -64,31 +71,42 @@ body {
 .minimal-hero h1 { font-size: clamp(28px, 6vw, 50px); line-height: 1.1; margin-bottom: 15px; z-index: 1; }
 .minimal-hero span { color: #4caf84; }
 
-/* PRODUCT CARD */
+/* PRODUCT GRID */
 .products { 
-    padding: 20px; display: grid; 
-    grid-template-columns: repeat(2, 1fr); gap: 15px; 
-    max-width: 1100px; margin: auto;
+    padding: 20px; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
+    max-width: 1100px; 
+    margin: auto;
 }
+
+@media (min-width: 768px) {
+    .products { grid-template-columns: repeat(4, 1fr); }
+}
+
 .product-card {
     background: #fff; border-radius: 15px; overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;
+    height: 100%;
 }
 .product-card:hover { transform: translateY(-5px); }
 
-/* COLOR CUSTOMIZER (FIXED MIX-BLEND-MODE) */
+/* COLOR CUSTOMIZER - ANTI TERPOTONG */
 .color-preview { 
     padding: 60px 20px; text-align: center; 
-    background: #ffffff; /* Kontras dengan body */
+    background: #ffffff; 
     margin-top: 40px;
 }
 .shirt-wrapper { 
     position: relative; 
-    width: 100%; max-width: 400px; 
+    width: 100%; 
+    max-width: 400px; 
     margin: 20px auto;
     background: #f9f9f9; 
     border-radius: 20px;
-    padding: 10px;
+    padding: 0; /* Padding nol agar inset shirtColor sinkron */
+    overflow: hidden;
 }
 .shirt-wrapper img { 
     width: 100%; height: auto; display: block; 
@@ -96,24 +114,33 @@ body {
 }
 #shirtColor { 
     position: absolute; 
-    inset: 10px; /* Sesuai padding wrapper */
-    background: #ffffff; 
-    mix-blend-mode: multiply; /* INI KUNCINYA */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: transparent; 
+    mix-blend-mode: multiply; 
     z-index: 2;
     pointer-events: none;
-    border-radius: 15px;
 }
 
-/* SIZE SELECTOR STYLE */
+/* SIZE SELECTOR - ANTI MIRING */
+.size-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 15px 0 5px;
+    display: block;
+    text-align: center;
+}
+
 .size-picker {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-    justify-content: center;
+    display: grid;
+    /* Membuat 4 kolom sama besar secara otomatis */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 8px;
+    margin: 10px auto;
+    max-width: 280px; /* Menjaga agar tetap proposional */
 }
 
 .size-chip {
-    padding: 8px 15px;
+    padding: 10px 0; /* Menggunakan padding vertical saja agar horizontal diatur grid */
     border: 2px solid #ddd;
     border-radius: 8px;
     cursor: pointer;
@@ -121,6 +148,10 @@ body {
     transition: 0.3s;
     background: white;
     color: #333;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .size-chip.selected {
@@ -129,12 +160,32 @@ body {
     color: #25D366;
 }
 
-.size-label {
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 10px;
-    display: block;
+/* MODAL FIX UNTUK HP */
+#modal {
+    padding: 20px;
+    z-index: 10000;
 }
+
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+}
+
+#modalImg {
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* CART DRAWER FIX */
+#cartDrawer {
+    position: fixed; top: 0; right: -100%; width: 85%; max-width: 380px;
+    height: 100vh; background: white; color: #1a1a1a; z-index: 9999;
+    transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+}
+#cartDrawer.open { right: 0; }
         
 /* FOOTER */
 footer { padding: 40px 20px; text-align: center; background: #2f3e34; color: #fff; }
@@ -246,14 +297,15 @@ footer { padding: 40px 20px; text-align: center; background: #2f3e34; color: #ff
     <button onclick="addToCart('Kaos Custom', 150000, 'Warna: ' + document.getElementById('colorCode').innerText)" style="background:#4caf84; color:white; border:none; padding:12px 30px; border-radius:8px; cursor:pointer; font-weight:bold;">Beli Kaos Custom</button>
 </section>
 
-<div id="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">×</span>
-        <img id="modalImg" src="">
-        <h2 id="modalTitle" style="margin:15px 0 5px;"></h2>
-        <div class="price" id="modalPrice"></div>
-        <p id="modalDesc" style="margin:10px 0; color:#666;"></p>
+<div id="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 10000;">
+    <div class="modal-content" style="background: white; padding: 20px; border-radius: 20px; width: 90%; max-width: 400px; position: relative;">
+        <span class="close" onclick="closeModal()" style="position: absolute; top: 10px; right: 20px; font-size: 30px; cursor: pointer;">&times;</span>
         
+        <img id="modalImg" src="" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
+        <h2 id="modalTitle" style="margin: 0;"></h2>
+        <div id="modalPrice" class="price" style="color: #25D366; font-weight: bold; font-size: 1.2rem; margin: 5px 0;"></div>
+        <p id="modalDesc" style="font-size: 0.9rem; color: #666;"></p>
+
         <span class="size-label">Pilih Ukuran:</span>
         <div class="size-picker" id="sizePicker">
             <div class="size-chip" onclick="selectSize(this)">S</div>
@@ -261,8 +313,10 @@ footer { padding: 40px 20px; text-align: center; background: #2f3e34; color: #ff
             <div class="size-chip" onclick="selectSize(this)">L</div>
             <div class="size-chip" onclick="selectSize(this)">XL</div>
         </div>
-        
-        <button id="modalAddBtn" style="width:100%; background:#25D366; color:white; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:10px;">Tambah ke Keranjang</button>
+
+        <button id="modalAddBtn" style="width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;">
+            Tambah ke Keranjang
+        </button>
     </div>
 </div>
 
@@ -381,44 +435,58 @@ function filterProduct(cat, btn) {
         grid.appendChild(box);
     });
 
-    let selectedSize = ""; // Variabel global untuk menyimpan size yang dipilih
+  let selectedSize = ""; // Variabel global untuk menyimpan size
 
 function selectSize(element) {
-    // Hapus kelas 'selected' dari semua chip
+    // Hapus status 'selected' dari semua tombol size
     document.querySelectorAll('.size-chip').forEach(chip => {
         chip.classList.remove('selected');
     });
-    // Tambah kelas 'selected' ke yang diklik
+    // Aktifkan tombol yang diklik
     element.classList.add('selected');
-    selectedSize = element.innerText; // Simpan sizenya
+    selectedSize = element.innerText;
 }
 
 function openModal(img, title, price, desc) {
-    selectedSize = ""; // Reset size setiap buka modal
+    // 1. Reset pilihan ukuran setiap kali modal dibuka
+    selectedSize = ""; 
     document.querySelectorAll('.size-chip').forEach(chip => chip.classList.remove('selected'));
     
-    document.getElementById("modal").style.display = "flex";
+    // 2. Ambil elemen modal
+    const modal = document.getElementById("modal");
+    
+    // 3. Masukkan data ke dalam modal
     document.getElementById("modalImg").src = img;
     document.getElementById("modalTitle").innerText = title;
     document.getElementById("modalPrice").innerText = price;
     document.getElementById("modalDesc").innerText = desc;
 
-    // Logika saat tombol Tambah diklik
-    document.getElementById("modalAddBtn").onclick = () => {
+    // 4. Tampilkan modal dengan Flex agar posisi di tengah
+    modal.style.display = "flex";
+
+    // 5. Atur fungsi tombol tambah ke keranjang
+    document.getElementById("modalAddBtn").onclick = function() {
         if (selectedSize === "") {
-            alert("Harap pilih ukuran terlebih dahulu!");
+            alert("Silakan pilih ukuran (S, M, L, atau XL) terlebih dahulu!");
             return;
         }
         
         const numericPrice = parseInt(price.replace(/[^0-9]/g, ''));
-        // Masukkan nama produk + ukuran ke keranjang
         addToCart(title, numericPrice, "Size: " + selectedSize);
         closeModal();
     };
 }
 
-function closeModal() { 
-    document.getElementById("modal").style.display = "none"; 
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+// Menutup modal jika user klik di luar area konten putih
+window.onclick = function(event) {
+    const modal = document.getElementById("modal");
+    if (event.target == modal) {
+        closeModal();
+    }
 }
 </script>
 
