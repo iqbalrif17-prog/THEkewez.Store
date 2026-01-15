@@ -2,201 +2,138 @@
 <html lang="id">
 <head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-  <style>
-/* FONT IMPORT */
+<style>
+/* 1. IMPORT & RESET */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
-/* GLOBAL */
 * { 
     box-sizing: border-box; 
-    font-family: 'Plus Jakarta Sans', Arial, sans-serif; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
 }
 
+/* KUNCI LAYAR AGAR TIDAK BISA ZOOM-OUT/GESER KANAN */
 html, body { 
     margin: 0; 
     padding: 0;
-    background: #f4f7f5; 
-    color: #2f3e34; 
-    scroll-behavior: smooth;
-    /* Mencegah zoom out/geser kanan di HP */
-    overflow-x: hidden;
     width: 100%;
+    overflow-x: hidden; 
+    background: #f4f7f5;
+    color: #2f3e34;
+    scroll-behavior: smooth;
 }
 
-/* NAVIGATION */
+/* 2. NAVIGATION */
 .mini-nav {
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0,0,0,0.05);
-    width: 100%;
 }
 .nav-inner {
     max-width: 1100px; margin: auto; padding: 15px 20px;
     display: flex; justify-content: space-between; align-items: center;
 }
 .logo { font-weight: 800; color: #2f3e34; font-size: 1.2rem; }
-.nav-links a { 
-    margin-left: 15px; text-decoration: none; 
-    font-weight: 600; color: #4caf84; 
-}
+.nav-links a { margin-left: 15px; text-decoration: none; font-weight: 600; color: #4caf84; }
 
-/* HERO PASTEL */
-.minimal-hero {
+/* 3. HERO SLIDER FIX (Agar gambar pas dan tidak bocor) */
+.hero {
     position: relative;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(135deg, #eef3f0 0%, #dfe7e2 100%);
-    overflow: hidden;
     width: 100%;
+    height: 50vh; /* Tinggi pas untuk HP & PC */
+    background: #000;
+    overflow: hidden;
 }
-
-.minimal-hero::before {
-    content: "";
+.hero-slide {
     position: absolute;
     inset: 0;
-    background-image: 
-        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    opacity: 0;
+    transition: 0.8s ease-in-out;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 4. MINIMAL HERO (Banner Pastel) */
+.minimal-hero {
+    position: relative; padding: 60px 20px; text-align: center;
+    background: linear-gradient(135deg, #eef3f0 0%, #dfe7e2 100%);
+    overflow: hidden;
+}
+.minimal-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 30px 30px;
-    pointer-events: none;
 }
+.minimal-hero h1 { font-size: clamp(24px, 6vw, 48px); position: relative; z-index: 1; margin: 0; }
 
-.minimal-hero h1 { font-size: clamp(28px, 6vw, 50px); line-height: 1.1; margin-bottom: 15px; z-index: 1; }
-.minimal-hero span { color: #4caf84; }
-
-/* PRODUCT GRID */
+/* 5. PRODUCT GRID */
 .products { 
-    padding: 20px; 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 15px; 
-    max-width: 1100px; 
-    margin: auto;
+    padding: 20px; display: grid; 
+    grid-template-columns: repeat(2, 1fr); gap: 15px; 
+    max-width: 1100px; margin: auto;
 }
-
-@media (min-width: 768px) {
-    .products { grid-template-columns: repeat(4, 1fr); }
-}
+@media (min-width: 768px) { .products { grid-template-columns: repeat(4, 1fr); } }
 
 .product-card {
     background: #fff; border-radius: 15px; overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;
-    height: 100%;
 }
-.product-card:hover { transform: translateY(-5px); }
+.product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.card-content { padding: 12px; }
 
-/* COLOR CUSTOMIZER - ANTI TERPOTONG */
-.color-preview { 
-    padding: 60px 20px; text-align: center; 
-    background: #ffffff; 
-    margin-top: 40px;
-}
+/* 6. CUSTOM WARNA KAOS (Fix Full Color) */
+.color-preview { padding: 50px 20px; text-align: center; background: #fff; }
 .shirt-wrapper { 
-    position: relative; 
-    width: 100%; 
-    max-width: 400px; 
-    margin: 20px auto;
-    background: #f9f9f9; 
-    border-radius: 20px;
-    padding: 0; /* Padding nol agar inset shirtColor sinkron */
-    overflow: hidden;
+    position: relative; width: 100%; max-width: 400px; 
+    margin: auto; background: #f9f9f9; border-radius: 20px;
 }
-.shirt-wrapper img { 
-    width: 100%; height: auto; display: block; 
-    position: relative; z-index: 1; 
-}
+.shirt-wrapper img { width: 100%; display: block; position: relative; z-index: 1; }
 #shirtColor { 
-    position: absolute; 
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: transparent; 
-    mix-blend-mode: multiply; 
-    z-index: 2;
-    pointer-events: none;
+    position: absolute; inset: 0; 
+    mix-blend-mode: multiply; z-index: 2; pointer-events: none;
 }
 
-/* SIZE SELECTOR - ANTI MIRING */
-.size-label {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 15px 0 5px;
-    display: block;
-    text-align: center;
-}
-
-.size-picker {
-    display: grid;
-    /* Membuat 4 kolom sama besar secara otomatis */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 8px;
-    margin: 10px auto;
-    max-width: 280px; /* Menjaga agar tetap proposional */
-}
-
-.size-chip {
-    padding: 10px 0; /* Menggunakan padding vertical saja agar horizontal diatur grid */
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-    background: white;
-    color: #333;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.size-chip.selected {
-    border-color: #25D366;
-    background: #e8f9ee;
-    color: #25D366;
-}
-
-/* MODAL FIX UNTUK HP */
+/* 7. MODAL FIX (Size Picker Anti Miring) */
 #modal {
-    padding: 20px;
-    z-index: 10000;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    display: none; align-items: center; justify-content: center; 
+    z-index: 99999; padding: 20px;
 }
-
 .modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-    width: 100%;
-    max-width: 450px;
-    border-radius: 20px;
+    background: #fff; width: 100%; max-width: 400px;
+    border-radius: 20px; padding: 20px; position: relative;
 }
-
-#modalImg {
-    max-height: 300px;
-    object-fit: contain;
+.size-label { display: block; margin: 15px 0 5px; font-weight: bold; font-size: 0.9rem; }
+.size-picker { 
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; 
 }
+.size-chip {
+    padding: 10px 0; border: 2px solid #ddd; border-radius: 8px;
+    text-align: center; cursor: pointer; font-weight: bold; transition: 0.3s;
+}
+.size-chip.selected { border-color: #25D366; background: #e8f9ee; color: #25D366; }
 
-/* CART DRAWER FIX */
+/* 8. CART DRAWER (Fix Melayang di Kanan) */
 #cartDrawer {
-    position: fixed; top: 0; right: -100%; width: 85%; max-width: 380px;
-    height: 100vh; background: white; color: #1a1a1a; z-index: 9999;
-    transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+    position: fixed; top: 0; right: -100%; width: 85%; max-width: 350px;
+    height: 100vh; background: #fff; z-index: 100000;
+    transition: 0.4s ease; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    display: flex; flex-direction: column;
 }
 #cartDrawer.open { right: 0; }
-        
-/* FOOTER */
-footer { padding: 40px 20px; text-align: center; background: #2f3e34; color: #fff; }
+.cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+#cartItems { flex: 1; overflow-y: auto; padding: 20px; }
 
-/* CART DRAWER FIX */
-#cartDrawer {
-    position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px;
-    height: 100vh; background: white; color: #1a1a1a; z-index: 9999;
-    transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+/* 9. BUTTONS */
+.btn-buy {
+    width: 100%; padding: 12px; background: #25D366; color: white;
+    border: none; border-radius: 10px; font-weight: bold; cursor: pointer;
 }
-#cartDrawer.open { right: 0; }
 </style>
 
 </head>
