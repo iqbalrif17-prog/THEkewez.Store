@@ -161,9 +161,7 @@
             <button onclick="event.stopPropagation(); addToCart('Hoodie Signature', 250000)" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
         </div>
     </div>
-    </section>
 
-    <section class="products">
     <div class="product-card Custom" onclick="openModal('https://picsum.photos/400/500?10', 'Hoodie Signature', 'Rp 250.000', 'Bahan Cotton Fleece tebal dan nyaman.')">
         <img src="https://picsum.photos/400/500?10">
         <div class="card-content">
@@ -172,9 +170,7 @@
             <button onclick="event.stopPropagation(); addToCart('Hoodie Signature', 250000)" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
         </div>
     </div>
-    </section>
-
-    <section class="products">
+   
     <div class="product-card Custom" onclick="openModal('https://picsum.photos/400/500?10', 'Hoodie Signature', 'Rp 250.000', 'Bahan Cotton Fleece tebal dan nyaman.')">
         <img src="https://picsum.photos/400/500?10">
         <div class="card-content">
@@ -284,7 +280,31 @@
         window.open(`https://wa.me/6288986266907?text=${encodeURIComponent(text)}`);
     }
 
-    /* 3. COLOR CUSTOMIZER */
+     /* 4. FilterProduct */
+function filterProduct(cat, btn) {
+    // 1. Mengatur tampilan tombol agar terlihat mana yang sedang aktif
+    document.querySelectorAll('.categories button').forEach(b => {
+        b.style.background = '#f0f0f0'; // Warna default tombol tidak aktif
+        b.style.color = '#333';
+    });
+    btn.style.background = '#25D366'; // Warna hijau saat aktif
+    btn.style.color = '#fff';
+
+    // 2. Logika utama pemfilteran produk
+    const items = document.querySelectorAll('.product-card');
+    
+    items.forEach(item => {
+        // Jika pilih 'all' atau kartu produk memiliki class yang sesuai dengan kategori (cat)
+        if (cat === 'all' || item.classList.contains(cat)) {
+            item.style.display = 'block'; // Tampilkan produk
+        } else {
+            item.style.display = 'none';  // Sembunyikan produk
+        }
+    });
+}
+
+    
+    /* 5. COLOR CUSTOMIZER */
     const colors = ["#000000", "#FFFFFF", "#FF0000", "#0000FF", "#FFFF00", "#00FF00", "#808080", "#FFC0CB"];
     const grid = document.getElementById("colorGrid");
     colors.forEach(c => {
@@ -298,7 +318,7 @@
         grid.appendChild(box);
     });
 
-    /* 4. MODAL LOGIC */
+    /* 6. MODAL LOGIC */
     function openModal(img, title, price, desc) {
         document.getElementById("modal").style.display = "flex";
         document.getElementById("modalImg").src = img;
