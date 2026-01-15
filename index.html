@@ -1,6 +1,56 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
+    <style>
+/* === FORCE BACKGROUND FIX FOR GITHUB === */
+
+/* GLOBAL */
+body{
+  margin:0;
+  background:#f2f5f3;
+}
+
+/* OPENING HERO */
+.minimal-hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  /* GRADASI PASTEL (FINAL) */
+  background:linear-gradient(
+    135deg,
+    #eef3f0,
+    #dfe7e2
+  ) !important;
+
+  color:#2f3e34;
+  overflow:hidden;
+}
+
+/* PATTERN HALUS */
+.minimal-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+
+/* PASTIKAN ISI DI ATAS */
+.minimal-hero > *{
+  position:relative;
+  z-index:1;
+}
+</style>
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEkewez.Store | Modern Streetwear</title>
