@@ -26,7 +26,7 @@
         /* CART DRAWER */
         #cartDrawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px;
-            height: 100vh; background: #fff; color: #000; z-index: 99999;
+            height: 100vh; background: transparent; color: #000; z-index: 99999;
             display: flex; flex-direction: column; transition: .35s ease;
             box-shadow: -5px 0 15px rgba(0,0,0,0.3);
         }
@@ -72,7 +72,7 @@
 
         /* COLOR CUSTOMIZER */
         .color-preview { padding: 50px 20px; text-align: center; background: #1a1a1a; }
-        .shirt-wrapper { position: relative; max-width: 280px; margin: auto; }
+        .shirt-wrapper { position: relative; max-width: 1000px; margin: auto; }
         #shirtColor { 
             position: absolute; inset: 0; background: #fff; 
             mix-blend-mode: multiply; opacity: 0.8; pointer-events: none; 
@@ -148,8 +148,8 @@
 </div>
 
 <div class="categories" style="display:flex; justify-content:center; gap:10px; margin-bottom:20px;">
-    <button onclick="filterProduct('all', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">Semua</button>
-    <button onclick="filterProduct('hoodie', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">Hoodie</button>
+    <button onclick="filterProduct('all', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">Custom</button>
+    <button onclick="filterProduct('hoodie', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">KewezStyke</button>
 </div>
 
 <section class="products">
