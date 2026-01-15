@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>THEkewez.Store</title>
 <style>
 /* 1. IMPORT & RESET */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
@@ -11,7 +13,6 @@
     font-family: 'Plus Jakarta Sans', sans-serif; 
 }
 
-/* KUNCI LAYAR AGAR TIDAK BISA ZOOM-OUT/GESER KANAN */
 html, body { 
     margin: 0; 
     padding: 0;
@@ -36,28 +37,18 @@ html, body {
 .logo { font-weight: 800; color: #2f3e34; font-size: 1.2rem; }
 .nav-links a { margin-left: 15px; text-decoration: none; font-weight: 600; color: #4caf84; }
 
-/* 3. HERO SLIDER FIX (Agar gambar pas dan tidak bocor) */
+/* 3. HERO SLIDER */
 .hero {
-    position: relative;
-    width: 100%;
-    height: 50vh; /* Tinggi pas untuk HP & PC */
-    background: #000;
-    overflow: hidden;
+    position: relative; width: 100%; height: 50vh; background: #000; overflow: hidden;
 }
 .hero-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: 0.8s ease-in-out;
+    position: absolute; inset: 0; opacity: 0; transition: 0.8s ease-in-out;
 }
 .hero-slide.active { opacity: 1; }
-.hero-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
 
-/* 4. MINIMAL HERO (Banner Pastel) */
+/* 4. BANNER & MINIMAL HERO */
+.logo-banner img { width: 100%; display: block; }
 .minimal-hero {
     position: relative; padding: 60px 20px; text-align: center;
     background: linear-gradient(135deg, #eef3f0 0%, #dfe7e2 100%);
@@ -70,35 +61,44 @@ html, body {
     background-size: 30px 30px;
 }
 .minimal-hero h1 { font-size: clamp(24px, 6vw, 48px); position: relative; z-index: 1; margin: 0; }
+.minimal-hero span { color: #4caf84; }
 
 /* 5. PRODUCT GRID */
 .products { 
-    padding: 20px; display: grid; 
-    grid-template-columns: repeat(2, 1fr); gap: 15px; 
+    padding: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; 
     max-width: 1100px; margin: auto;
 }
 @media (min-width: 768px) { .products { grid-template-columns: repeat(4, 1fr); } }
 
 .product-card {
     background: #fff; border-radius: 15px; overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer;
 }
+.product-card:hover { transform: translateY(-5px); }
 .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
 .card-content { padding: 12px; }
+.price { color: #25D366; font-weight: bold; }
 
-/* 6. CUSTOM WARNA KAOS (Fix Full Color) */
+/* 6. COLOR CUSTOMIZER (FIXED) */
 .color-preview { padding: 50px 20px; text-align: center; background: #fff; }
 .shirt-wrapper { 
-    position: relative; width: 100%; max-width: 400px; 
-    margin: auto; background: #f9f9f9; border-radius: 20px;
+    position: relative; width: 100%; max-width: 350px; margin: auto; 
+    background: #f9f9f9; border-radius: 20px; overflow: hidden;
 }
 .shirt-wrapper img { width: 100%; display: block; position: relative; z-index: 1; }
-#shirtColor { 
-    position: absolute; inset: 0; 
-    mix-blend-mode: multiply; z-index: 2; pointer-events: none;
-}
+#shirtColor { position: absolute; inset: 0; mix-blend-mode: multiply; z-index: 2; pointer-events: none; }
 
-/* 7. MODAL FIX (Size Picker Anti Miring) */
+/* CSS BARU: Memunculkan Kotak Warna */
+.color-grid {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 20px auto; max-width: 400px;
+}
+.color-box {
+    width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+    border: 3px solid #fff; box-shadow: 0 0 0 1px #ddd; transition: 0.2s;
+}
+.color-box:hover { transform: scale(1.1); }
+
+/* 7. MODAL FIX */
 #modal {
     position: fixed; inset: 0; background: rgba(0,0,0,0.8);
     display: none; align-items: center; justify-content: center; 
@@ -106,19 +106,16 @@ html, body {
 }
 .modal-content {
     background: #fff; width: 100%; max-width: 400px;
-    border-radius: 20px; padding: 20px; position: relative;
+    border-radius: 20px; padding: 25px; position: relative; text-align: center;
 }
-.size-label { display: block; margin: 15px 0 5px; font-weight: bold; font-size: 0.9rem; }
-.size-picker { 
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; 
-}
+.size-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0; }
 .size-chip {
     padding: 10px 0; border: 2px solid #ddd; border-radius: 8px;
-    text-align: center; cursor: pointer; font-weight: bold; transition: 0.3s;
+    cursor: pointer; font-weight: bold; transition: 0.2s;
 }
 .size-chip.selected { border-color: #25D366; background: #e8f9ee; color: #25D366; }
 
-/* 8. CART DRAWER (Fix Melayang di Kanan) */
+/* 8. CART DRAWER */
 #cartDrawer {
     position: fixed; top: 0; right: -100%; width: 85%; max-width: 350px;
     height: 100vh; background: #fff; z-index: 100000;
@@ -126,16 +123,14 @@ html, body {
     display: flex; flex-direction: column;
 }
 #cartDrawer.open { right: 0; }
-.cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+.cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
 #cartItems { flex: 1; overflow-y: auto; padding: 20px; }
+.cart-item { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; text-align: left; }
+.cart-footer { padding: 20px; border-top: 1px solid #eee; }
+.cart-footer button { width: 100%; padding: 12px; background: #25D366; color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
-/* 9. BUTTONS */
-.btn-buy {
-    width: 100%; padding: 12px; background: #25D366; color: white;
-    border: none; border-radius: 10px; font-weight: bold; cursor: pointer;
-}
+footer { padding: 40px 20px; text-align: center; background: #2f3e34; color: #fff; margin-top: 40px; }
 </style>
-
 </head>
 <body>
 
@@ -151,11 +146,10 @@ html, body {
 
 <div id="cartDrawer">
     <div class="cart-header">
-        <h3>Keranjang Belanja</h3>
-        <span onclick="toggleCart()">×</span>
+        <h3>Keranjang</h3>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size: 24px;">&times;</span>
     </div>
-    <div id="cartItems">
-        </div>
+    <div id="cartItems"></div>
     <div class="cart-footer">
         <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
             <span>Total:</span>
@@ -166,16 +160,14 @@ html, body {
 </div>
 
 <div class="logo-banner">
-    <img src="assets/img/bann-er.jpg" onerror="this.src='https://via.placeholder.com/1200x300?text=THEkewez+Banner'">
+    <img src="assets/img/bann-er.jpg" onerror="this.src='https://via.placeholder.com/1200x400?text=THEkewez+Store'">
 </div>
 
 <section class="minimal-hero">
-    <div class="minimal-hero-inner">
-        <h1>MODERN <span>STREETWEAR</span><br>FOR DAILY STYLE</h1>
-        <p>Simple design, comfortable materials, and clean aesthetics.</p>
-        <div style="margin-top:20px;">
-            <a href="#shop" style="background:#4caf84; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold;">Shop Now</a>
-        </div>
+    <h1>MODERN <span>STREETWEAR</span><br>FOR DAILY STYLE</h1>
+    <p>Simple design, comfortable materials, and clean aesthetics.</p>
+    <div style="margin-top:20px;">
+        <a href="#shop" style="background:#4caf84; color:white; padding:12px 25px; text-decoration:none; border-radius:8px; font-weight:bold;">Shop Now</a>
     </div>
 </section>
 
@@ -187,73 +179,59 @@ html, body {
 
 <div id="shop" style="padding: 40px 20px 10px; text-align:center;">
     <h2>Koleksi Kami</h2>
-</div>
-
-<div class="categories" style="display:flex; justify-content:center; gap:10px; margin-bottom:20px;">
-    <button onclick="filterProduct('Custom', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">Custom</button>
-    <button onclick="filterProduct('KewezStyle', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer;">KewezStyle</button>
+    <div class="categories" style="display:flex; justify-content:center; gap:10px; margin: 20px 0;">
+        <button onclick="filterProduct('all', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer; background:#25D366; color:#fff;">Semua</button>
+        <button onclick="filterProduct('Custom', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer; background:#f0f0f0;">Custom</button>
+        <button onclick="filterProduct('KewezStyle', this)" style="padding:8px 20px; border-radius:20px; border:none; cursor:pointer; background:#f0f0f0;">KewezStyle</button>
+    </div>
 </div>
 
 <section class="products">
     <div class="product-card KewezStyle" onclick="openModal('assets/img/cek banner.png', 'Hoodie Signature', 'Rp 250.000', 'Bahan Cotton Fleece tebal dan nyaman.')">
-        <img src="assets/img/cek banner.png">
-        <div class="card-content">
-            <h3>Hoodie Signature</h3>
-            <div class="price">Rp 85.000</div>
-            <button onclick="event.stopPropagation(); addToCart('Hoodie Signature', 250000)" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
-        </div>
-    </div>
-
-    <div class="product-card Custom" onclick="openModal('https://picsum.photos/400/500?10', 'Hoodie Signature', 'Rp 250.000', 'Bahan Cotton Fleece tebal dan nyaman.')">
-        <img src="https://picsum.photos/400/500?10">
+        <img src="assets/img/cek banner.png" onerror="this.src='https://via.placeholder.com/400x400?text=Hoodie'">
         <div class="card-content">
             <h3>Hoodie Signature</h3>
             <div class="price">Rp 250.000</div>
-            <button onclick="event.stopPropagation(); addToCart('Hoodie Signature', 250000)" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
+            <button onclick="event.stopPropagation(); openModal('assets/img/cek banner.png', 'Hoodie Signature', 'Rp 250.000', 'Pilih ukuran dulu ya!')" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
         </div>
     </div>
-   
-    <div class="product-card Custom" onclick="openModal('https://picsum.photos/400/500?10', 'Hoodie Signature', 'Rp 250.000', 'Bahan Cotton Fleece tebal dan nyaman.')">
+    <div class="product-card Custom" onclick="openModal('https://picsum.photos/400/500?10', 'T-Shirt Urban', 'Rp 150.000', 'Kaos premium dengan desain modern.')">
         <img src="https://picsum.photos/400/500?10">
         <div class="card-content">
-            <h3>Hoodie Signature</h3>
-            <div class="price">Rp 250.000</div>
-            <button onclick="event.stopPropagation(); addToCart('Hoodie Signature', 250000)" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
+            <h3>T-Shirt Urban</h3>
+            <div class="price">Rp 150.000</div>
+            <button onclick="event.stopPropagation(); openModal('https://picsum.photos/400/500?10', 'T-Shirt Urban', 'Rp 150.000', 'Pilih ukuran dulu ya!')" style="width:100%; margin-top:10px; background:#25D366; border:none; padding:8px; border-radius:5px; color:white; font-weight:bold;">+ Keranjang</button>
         </div>
     </div>
-    </section>
+</section>
 
 <section class="color-preview">
     <h2>Custom Warna Kaos</h2>
-   <div class="shirt-wrapper">
-    <img src="assets/img/KAOS.png" alt="Baju">
-    <div id="shirtColor" style="background-color: #ffffff; mix-blend-mode: multiply;"></div>
-</div>
+    <div class="shirt-wrapper">
+        <img src="assets/img/KAOS.png" onerror="this.src='https://raw.githubusercontent.com/iqbalrif17-prog/THEkewez.Store/main/assets/img/KAOS.png'">
+        <div id="shirtColor"></div>
+    </div>
     <p>Warna dipilih: <b id="colorCode">#FFFFFF</b></p>
     <div class="color-grid" id="colorGrid"></div>
     <button onclick="addToCart('Kaos Custom', 150000, 'Warna: ' + document.getElementById('colorCode').innerText)" style="background:#4caf84; color:white; border:none; padding:12px 30px; border-radius:8px; cursor:pointer; font-weight:bold;">Beli Kaos Custom</button>
 </section>
 
-<div id="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 10000;">
-    <div class="modal-content" style="background: white; padding: 20px; border-radius: 20px; width: 90%; max-width: 400px; position: relative;">
-        <span class="close" onclick="closeModal()" style="position: absolute; top: 10px; right: 20px; font-size: 30px; cursor: pointer;">&times;</span>
-        
-        <img id="modalImg" src="" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
+<div id="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="position: absolute; top: 10px; right: 20px; font-size: 30px; cursor: pointer;">&times;</span>
+        <img id="modalImg" src="" style="width: 100%; border-radius: 10px; margin-bottom: 15px; max-height: 250px; object-fit: contain;">
         <h2 id="modalTitle" style="margin: 0;"></h2>
-        <div id="modalPrice" class="price" style="color: #25D366; font-weight: bold; font-size: 1.2rem; margin: 5px 0;"></div>
+        <div id="modalPrice" style="color: #25D366; font-weight: bold; font-size: 1.2rem; margin: 5px 0;"></div>
         <p id="modalDesc" style="font-size: 0.9rem; color: #666;"></p>
 
         <span class="size-label">Pilih Ukuran:</span>
-        <div class="size-picker" id="sizePicker">
+        <div class="size-picker">
             <div class="size-chip" onclick="selectSize(this)">S</div>
             <div class="size-chip" onclick="selectSize(this)">M</div>
             <div class="size-chip" onclick="selectSize(this)">L</div>
             <div class="size-chip" onclick="selectSize(this)">XL</div>
         </div>
-
-        <button id="modalAddBtn" style="width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;">
-            Tambah ke Keranjang
-        </button>
+        <button id="modalAddBtn" style="width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;">Tambah ke Keranjang</button>
     </div>
 </div>
 
@@ -262,7 +240,7 @@ html, body {
 </footer>
 
 <script>
-    /* 1. HERO SLIDER LOGIC */
+    /* 1. HERO SLIDER */
     let slides = document.querySelectorAll('.hero-slide');
     let currentSlide = 0;
     setInterval(() => {
@@ -273,10 +251,7 @@ html, body {
 
     /* 2. CART SYSTEM */
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function toggleCart() {
-        document.getElementById("cartDrawer").classList.toggle("open");
-    }
+    function toggleCart() { document.getElementById("cartDrawer").classList.toggle("open"); }
 
     function addToCart(name, price, variant = "") {
         const found = cart.find(i => i.name === name && i.variant === variant);
@@ -297,74 +272,49 @@ html, body {
         const container = document.getElementById("cartItems");
         const totalElem = document.getElementById("cartTotal");
         const countElem = document.getElementById("cartCount");
-        
         container.innerHTML = "";
-        let total = 0;
-        let count = 0;
-
+        let total = 0; let count = 0;
         cart.forEach((item, i) => {
             total += item.price * item.qty;
             count += item.qty;
             container.innerHTML += `
                 <div class="cart-item">
-                    <div>
-                        <b>${item.name}</b><br>
-                        <small>${item.variant}</small><br>
-                        <span>Rp ${item.price.toLocaleString()}</span>
-                    </div>
-                    <div class="qty">
-                        <button onclick="changeQty(${i}, -1)">-</button>
+                    <div><b>${item.name}</b><br><small>${item.variant}</small><br><span>Rp ${item.price.toLocaleString()}</span></div>
+                    <div style="display:flex; align-items:center; gap:5px;">
+                        <button onclick="changeQty(${i}, -1)" style="padding:2px 8px;">-</button>
                         <span>${item.qty}</span>
-                        <button onclick="changeQty(${i}, 1)">+</button>
+                        <button onclick="changeQty(${i}, 1)" style="padding:2px 8px;">+</button>
                     </div>
-                </div>
-            `;
+                </div>`;
         });
         totalElem.innerText = "Rp " + total.toLocaleString();
         countElem.innerText = count;
     }
+    updateCart();
 
     function checkoutWA() {
-        if (cart.length === 0) return alert("Keranjang masih kosong!");
-        let text = "Halo THEkewez.Store, saya ingin order:\n\n";
-        cart.forEach((item, i) => {
-            text += `${i+1}. ${item.name} (${item.variant}) x${item.qty} = Rp ${(item.price*item.qty).toLocaleString()}\n`;
-        });
+        if (cart.length === 0) return alert("Keranjang kosong!");
+        let text = "Halo THEkewez.Store, saya mau order:\n\n";
+        cart.forEach((item, i) => { text += `${i+1}. ${item.name} (${item.variant}) x${item.qty}\n`; });
         text += `\nTotal: ${document.getElementById("cartTotal").innerText}`;
         window.open(`https://wa.me/6288986266907?text=${encodeURIComponent(text)}`);
     }
 
-     /* 4. FilterProduct */
-function filterProduct(cat, btn) {
-    // 1. Mengatur tampilan tombol agar terlihat mana yang sedang aktif
-    document.querySelectorAll('.categories button').forEach(b => {
-        b.style.background = '#f0f0f0'; // Warna default tombol tidak aktif
-        b.style.color = '#333';
-    });
-    btn.style.background = '#25D366'; // Warna hijau saat aktif
-    btn.style.color = '#fff';
+    /* 3. FILTER */
+    function filterProduct(cat, btn) {
+        document.querySelectorAll('.categories button').forEach(b => { b.style.background = '#f0f0f0'; b.style.color = '#333'; });
+        btn.style.background = '#25D366'; btn.style.color = '#fff';
+        document.querySelectorAll('.product-card').forEach(item => {
+            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? 'block' : 'none';
+        });
+    }
 
-    // 2. Logika utama pemfilteran produk
-    const items = document.querySelectorAll('.product-card');
-    
-    items.forEach(item => {
-        // Jika pilih 'all' atau kartu produk memiliki class yang sesuai dengan kategori (cat)
-        if (cat === 'all' || item.classList.contains(cat)) {
-            item.style.display = 'block'; // Tampilkan produk
-        } else {
-            item.style.display = 'none';  // Sembunyikan produk
-        }
-    });
-}
-
-    
-    /* 5. COLOR CUSTOMIZER */
-    const colors = ["#000000", "#FFFFFF", "#FF0000", "#0000FF", "#FFFF00", "#00FF00", "#808080", "#FFC0CB"];
+    /* 4. COLOR CUSTOMIZER */
+    const colors = ["#000000", "#FFFFFF", "#FF0000", "#0000FF", "#FFFF00", "#00FF00", "#808080", "#FFC0CB", "#4caf84", "#ffa500"];
     const grid = document.getElementById("colorGrid");
     colors.forEach(c => {
         const box = document.createElement("div");
-        box.className = "color-box";
-        box.style.background = c;
+        box.className = "color-box"; box.style.background = c;
         box.onclick = () => {
             document.getElementById("shirtColor").style.background = c;
             document.getElementById("colorCode").innerText = c;
@@ -372,60 +322,29 @@ function filterProduct(cat, btn) {
         grid.appendChild(box);
     });
 
-  let selectedSize = ""; // Variabel global untuk menyimpan size
-
-function selectSize(element) {
-    // Hapus status 'selected' dari semua tombol size
-    document.querySelectorAll('.size-chip').forEach(chip => {
-        chip.classList.remove('selected');
-    });
-    // Aktifkan tombol yang diklik
-    element.classList.add('selected');
-    selectedSize = element.innerText;
-}
-
-function openModal(img, title, price, desc) {
-    // 1. Reset pilihan ukuran setiap kali modal dibuka
-    selectedSize = ""; 
-    document.querySelectorAll('.size-chip').forEach(chip => chip.classList.remove('selected'));
-    
-    // 2. Ambil elemen modal
-    const modal = document.getElementById("modal");
-    
-    // 3. Masukkan data ke dalam modal
-    document.getElementById("modalImg").src = img;
-    document.getElementById("modalTitle").innerText = title;
-    document.getElementById("modalPrice").innerText = price;
-    document.getElementById("modalDesc").innerText = desc;
-
-    // 4. Tampilkan modal dengan Flex agar posisi di tengah
-    modal.style.display = "flex";
-
-    // 5. Atur fungsi tombol tambah ke keranjang
-    document.getElementById("modalAddBtn").onclick = function() {
-        if (selectedSize === "") {
-            alert("Silakan pilih ukuran (S, M, L, atau XL) terlebih dahulu!");
-            return;
-        }
-        
-        const numericPrice = parseInt(price.replace(/[^0-9]/g, ''));
-        addToCart(title, numericPrice, "Size: " + selectedSize);
-        closeModal();
-    };
-}
-
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-// Menutup modal jika user klik di luar area konten putih
-window.onclick = function(event) {
-    const modal = document.getElementById("modal");
-    if (event.target == modal) {
-        closeModal();
+    /* 5. MODAL LOGIC */
+    let selectedSize = "";
+    function selectSize(el) {
+        document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedSize = el.innerText;
     }
-}
+    function openModal(img, title, price, desc) {
+        selectedSize = ""; 
+        document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('selected'));
+        document.getElementById("modalImg").src = img;
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalPrice").innerText = price;
+        document.getElementById("modalDesc").innerText = desc;
+        document.getElementById("modal").style.display = "flex";
+        document.getElementById("modalAddBtn").onclick = () => {
+            if (!selectedSize) return alert("Pilih ukuran dulu!");
+            addToCart(title, parseInt(price.replace(/[^0-9]/g, '')), "Size: " + selectedSize);
+            closeModal();
+        };
+    }
+    function closeModal() { document.getElementById("modal").style.display = "none"; }
+    window.onclick = (e) => { if (e.target == document.getElementById("modal")) closeModal(); }
 </script>
-
 </body>
 </html>
