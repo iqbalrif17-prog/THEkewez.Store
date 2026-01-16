@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>THEkewez.Store</title>
@@ -140,7 +143,7 @@ html, body {
 }
 .color-box:hover { transform: scale(1.1); }
 
-/* 7. MODAL FIX (Optimasi Mobile & PC) */
+/* 7. MODAL FIX (OPTIMASI HP & PC) */
 #modal {
     position: fixed; 
     inset: 0; 
@@ -149,63 +152,49 @@ html, body {
     align-items: center; 
     justify-content: center;  
     z-index: 99999; 
-    padding: 10px; /* Padding luar diperkecil agar modal bisa lebih lebar di HP */
+    padding: 10px; /* Padding luar kecil agar modal bisa lebar di HP */
 }
 
 .modal-content {
     background: #fff; 
-    width: 95%; /* Di HP akan mengambil 95% lebar layar */
-    max-width: 450px; /* Di PC tetap proporsional (sedikit lebih lebar dari 400px) */
+    width: 95% !important; /* Paksa lebar 95% di semua layar */
+    max-width: 450px !important; /* Tapi di PC tetap dibatasi 450px */
     border-radius: 20px; 
     padding: 20px; 
     position: relative; 
     text-align: center;
-    max-height: 90vh; /* Agar tidak terpotong jika layar HP pendek */
-    overflow-y: auto; /* Bisa di-scroll jika konten kepanjangan */
+    max-height: 90vh; 
+    overflow-y: auto;
 }
 
-/* Memperbesar elemen di dalam modal khusus untuk layar HP */
-@media (max-width: 480px) {
+/* KHUSUS ANDROID/IPHONE (Layar di bawah 600px) */
+@media screen and (max-width: 600px) {
     .modal-content {
+        width: 98% !important; /* Nyaris full layar HP */
         padding: 15px;
-        width: 98%; /* Nyaris full di Android */
+        margin: 0 auto;
     }
-    
+
     #modalImg {
-        max-height: 280px; /* Gambar lebih besar di HP */
+        max-height: 300px !important; /* Gambar diperbesar */
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .size-picker {
+        gap: 8px;
     }
 
     .size-chip {
-        padding: 15px 0; /* Area klik lebih besar (Thumb-friendly) */
+        padding: 15px 0 !important; /* Tombol lebih tinggi agar mudah ditekan jempol */
         font-size: 1.1rem;
     }
 
     #modalAddBtn {
-        padding: 16px;
+        padding: 16px !important;
         font-size: 1.1rem;
+        font-weight: 800;
     }
-}
-
-.size-picker { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 10px; 
-    margin: 15px 0; 
-}
-
-.size-chip {
-    padding: 10px 0; 
-    border: 2px solid #ddd; 
-    border-radius: 8px;
-    cursor: pointer; 
-    font-weight: bold; 
-    transition: 0.2s;
-}
-
-.size-chip.selected { 
-    border-color: #25D366; 
-    background: #e8f9ee; 
-    color: #25D366; 
 }
 
 /* 8. CART DRAWER */
