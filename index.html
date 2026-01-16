@@ -79,36 +79,56 @@ html, body {
 .card-content { padding: 12px; }
 .price { color: #25D366; font-weight: bold; }
 
-/* 6. COLOR CUSTOMIZER (FIXED) */
-.color-preview { padding: 50px 20px; text-align: center; background: #fff; }
+/* 6. COLOR CUSTOMIZER (FIXED & MATCHING) */
+.color-preview { 
+    padding: 50px 20px; 
+    text-align: center; 
+    background: #fff; 
+}
+
 .shirt-wrapper {
     position: relative;
     width: 100%;
-    max-width: 350px;
-    margin: auto;
-    background: transparent; /* Ubah ke transparan */
-    overflow: hidden;
+    max-width: 1000px; /* Samakan dengan ukuran gambar kamu */
+    margin: 20px auto;
+    background: #f9f9f9; /* Background kontainer agar terlihat clean */
+    border-radius: 20px;
+    line-height: 0; /* Menghilangkan gap extra di bawah gambar */
 }
+
+.shirt-wrapper img { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    position: relative; 
+    z-index: 1; 
 }
-.shirt-wrapper img { width: 100%; display: block; position: relative; z-index: 1; }
+
 #shirtColor {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
     pointer-events: none;
     mix-blend-mode: multiply;
     
-    /* Tambahkan ini agar warna mengikuti bentuk baju */
+    /* Gunakan background-color untuk warna kustom */
+    background-color: #ffffff; 
+
+    /* MASKING: Ini yang membuat warna hanya muncul di area baju */
     -webkit-mask-image: url('assets/img/KAOS.png');
     mask-image: url('assets/img/KAOS.png');
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    
+    /* Pastikan settingan masker sama persis dengan settingan gambar asli */
+    -webkit-mask-size: 100% auto;
+    mask-size: 100% auto;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+    -webkit-mask-position: center top;
+    mask-position: center top;
 }
-    #shirtColor { position: absolute; inset: 0; mix-blend-mode: multiply; z-index: 2; pointer-events: none; }
 
 /* CSS BARU: Memunculkan Kotak Warna */
 .color-grid {
